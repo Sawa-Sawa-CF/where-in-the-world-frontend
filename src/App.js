@@ -1,12 +1,28 @@
-
+import React from 'react';
+import LogoutButton from './LogoutButton';
+import LoginButton from './LogButton';
 import './App.css';
+import { withAuth0 } from '@auth0/auth0-react';
 
-function App() {
-  return (
-    <>
-    <h1>hello world</h1>
-    </>
-  );
+class App extends React.Component {
+
+  render() {
+    return (
+      <>
+        <h1>Auth0</h1>
+        {
+          this.props.auth0.isAuthenticated
+            ? <LogoutButton />
+            : <LoginButton />
+        }
+        {
+          this.props.auth0.isAuthenticated
+            ? < />
+            : <h2>Please Log In</h2>
+        }
+      </>
+    )
+  }
 }
 
-export default App;
+export default withAuth0(App);
