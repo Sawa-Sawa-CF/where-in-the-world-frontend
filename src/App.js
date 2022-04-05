@@ -4,15 +4,28 @@ import LoginButton from './LoginButton';
 import Content from './Content.js';
 import './App.css';
 import './Header.css';
+import Header from './Header'
 import { withAuth0 } from '@auth0/auth0-react';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       user: null
+    }
+  }
+
+  
+
 
   render() {
     console.log(this.props.auth0.isAuthenticated);
     return (
+    
+      
       <>
-        <h1>Where in the World Auth0 Login:</h1>
+      <Header/>
         {
           this.props.auth0.isAuthenticated
             ? <LogoutButton />
@@ -24,6 +37,8 @@ class App extends React.Component {
             : <h2>Please Log In to </h2>
         }
       </>
+     
+      
     )
   }
 }
