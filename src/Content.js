@@ -4,6 +4,7 @@ import Profile from './Profile';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 import { withAuth0 } from "@auth0/auth0-react";
+import YelpResult from './YelpResult';
 
 class Content extends React.Component {
     constructor(props) {
@@ -13,13 +14,13 @@ class Content extends React.Component {
         }
     }
 
-    getBooks = async () => {
+    getYelpResults = async () => {
         // JSON Web Token = JWT (pronounced JOT)
         if (this.props.auth0.isAuthenticated) {
+            
             // get token:
             const res = await this.props.auth0.getIdTokenClaims();
-
-
+            
             // MUST use double underscores
             const jwt = res.__raw;
             // a console.log of the token // this is as far as you need to go for the lab. Get the jwt to log to the console.
@@ -28,31 +29,25 @@ class Content extends React.Component {
             const config = {
                 method: 'get',
                 baseURL: process.env.REACT_APP_SERVER,
-                url: '/books',
+                url: '/restaurants',
                 headers: { "Authorization": `Bearer ${jwt}` }
             };
-            const bookResults = await axios(config);
-
-
-            //  // the way we have been doing it:
-            // let url = `${process.env.REACT_APP_SERVER}/books`;
-            // const bookResults = await axios.get(url);
-            console.log(bookResults.data);
+            const queryResults = await axios(config);
+            console.log(queryResults.data.businesses);
+            this.state.yelpData = queryResults.data.businesses;
         }
     }
     componentDidMount() {
-        this.getBooks();
+        this.getYelpResults();
     }
 
     render() {
         return (
             <>
                 <h1>City</h1>
-                {
-                    this.props.auth0.isAuthenticated
-                        ? <LogoutButton />
-                        : <LoginButton />
-                }
+                {this.state.yelpData.map((yelpResult, idx) =>
+                    <YelpResult key={idx} item={yelpResult} />         
+                )};
             </>
         );
     }
