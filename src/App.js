@@ -9,11 +9,13 @@ import './App.css';
 import './Header.css';
 import Header from './Header'
 import { withAuth0 } from '@auth0/auth0-react';
+
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+
 
 
 class App extends React.Component {
@@ -42,6 +44,7 @@ class App extends React.Component {
 
 
       <>
+
       <Router>
         <Header user={this.state.user} renderLogoutUrl={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
         <Switch>
@@ -60,7 +63,6 @@ class App extends React.Component {
         
       </Router>
     </> 
-
 
     )
   }
