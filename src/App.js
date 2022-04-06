@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import Login from './Login';
 import Content from './Content';
 import Profile from './Profile';
@@ -42,13 +40,14 @@ class App extends React.Component {
     console.log(this.props.auth0.isAuthenticated);
     return (
 
-
-      <>
-
+      <div>
       <Router>
         <Header user={this.state.user} renderLogoutUrl={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
         <Switch>
           <Route exact path="/">
+          <section>
+            
+          </section>
           {this.props.auth0.isAuthenticated ? <Content /> : 
             <Login loginHandler={this.loginHandler}></Login> }
           </Route>
@@ -62,8 +61,7 @@ class App extends React.Component {
         <Footer />
         
       </Router>
-    </> 
-
+    </div> 
     )
   }
 }
