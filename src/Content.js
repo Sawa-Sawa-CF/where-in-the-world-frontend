@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Content.css';
 // import Profile from './Profile';
 // import LoginButton from './LoginButton';
 // import LogoutButton from './LogoutButton';
@@ -73,8 +74,9 @@ handleAddButton = (restaurant) => {
     render() {
         console.log('updated state after add button pressed: ', this.props.yelpDataForProfile);
         return (
-            <>
-                <Form onSubmit={this.performSearch}>
+            <>  
+                <section className='form-section'>
+                    <Form onSubmit={this.performSearch}>
                     <Form.Group controlId="City">
                         <Form.Label>City</Form.Label>
                         <Form.Control type="text" />
@@ -87,6 +89,8 @@ handleAddButton = (restaurant) => {
                         Search
                     </Button>
                 </Form>
+                </section>
+                
 
             
                
@@ -113,45 +117,32 @@ handleAddButton = (restaurant) => {
                         })}
                     </Accordion> */}
 
-
-
                      {
                          this.props.yelpData 
                          ?
                      
                      this.props.yelpData.map((restaurantData, idx) =>
                      <Card style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
+
                              <Card.Img variant="top"
                             src={restaurantData.image_url} />
                             <Card.Body>
-                                <Card.Title>{restaurantData.name}</Card.Title>
-                                <Card.Subtitle>{restaurantData.rating}</Card.Subtitle>
+                                <Card.Title>{restaurantData.name} </Card.Title>
+                                <Card.Subtitle>{restaurantData.rating}Stars</Card.Subtitle>
                                 <Card.Text>
-                                    {restaurantData.address1}
-                                </Card.Text>
-                                <Card.Text>
-                                    {restaurantData.city}
-                                </Card.Text>
-
-                                <Card.Text>
-                                    {restaurantData.state}
-                                </Card.Text>
-                                <Card.Text>
-                                    {restaurantData.zip_code}
+                                   {restaurantData.address1}, {restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}
                                 </Card.Text>
 
                                 <Button variant="primary" onClick={() => this.handleAddButton(restaurantData)}>Add</Button>
                             </Card.Body>
                         </Card>
-                     
+
                         )
                         
                         :
                         <></>
                      }
                     
-
-                
             </>
         );
     }

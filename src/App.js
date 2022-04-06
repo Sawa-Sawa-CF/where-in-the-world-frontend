@@ -9,6 +9,7 @@ import './Header.css';
 import Header from './Header'
 import { withAuth0 } from '@auth0/auth0-react';
 
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -63,7 +64,7 @@ postRestaurants = async (newRestaurant) => {
 
 
   render() {
-    const logoutUrl = this.props.auth0.buildLogoutUrl({returnTo: window.location.href});
+    const logoutUrl = this.props.auth0.buildLogoutUrl({ returnTo: window.location.href });
     console.log(this.props.auth0.isAuthenticated);
     return (
 
@@ -85,17 +86,17 @@ postRestaurants = async (newRestaurant) => {
           /> : 
             <Login loginHandler={this.loginHandler}></Login> }
           </Route>
-          <Route exact path="/profile">
+            <Route exact path="/profile">
 
-          <Profile user={this.state.user}>
+              <Profile user={this.state.user}>
 
-          </Profile>
-          </Route>
-        </Switch>
-        <Footer />
-        
-      </Router>
-    </div> 
+              </Profile>
+            </Route>
+          </Switch>
+          <Footer />
+
+        </Router>
+      </div>
     )
   }
 }
