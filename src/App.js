@@ -8,7 +8,7 @@ import './App.css';
 import './Header.css';
 import Header from './Header'
 import { withAuth0 } from '@auth0/auth0-react';
-import { BrowserRouter as Router,  Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -46,7 +46,6 @@ class App extends React.Component {
                   <Profile userInfo={this.state.user} />
                 </Route>
                 <Route exact path="/LoginButton">
-                  {/* <LoginForm loginHandler={this.setLogin} /> */}
                 </Route>
                 <Route exact path="/LogoutButton">
                   <LogoutButton onLogout={this.logoutHandler} />
