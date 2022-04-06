@@ -3,6 +3,7 @@ import Login from './Login';
 import Content from './Content';
 import Profile from './Profile';
 import Footer from './Footer';
+import axios from 'axios';
 import './App.css';
 import './Header.css';
 import Header from './Header'
@@ -21,7 +22,9 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      user: null
+      user: null,
+      yelpData: null,
+      yelpDataForProfile: []
     }
   }
 
@@ -32,7 +35,31 @@ class App extends React.Component {
     }, () => console.log(this.state))
   }
 
+  getRestaurants = async (city, food) => {
+    try {
+        let restaurants = await axios.get(`${process.env.REACT_APP_SERVER}/restaurants?location=${city}&term=${food}`);
+        console.log(restaurants);
+        this.setState({
+            yelpData: restaurants.data
+        })
+    } catch (error) {
+        console.log(`error message `, error);
+    }
+}
 
+
+postRestaurants = async (newRestaurant) => {
+  try {
+      let dataToPost = await axios.post(`${process.env.REACT_APP_SERVER}/restaurants`, newRestaurant);
+      console.log(dataToPost.data, 'dataToPost'); 
+      this.setState({
+      yelpDataForProfile: [...this.state.yelpDataForProfile, dataToPost.data]
+  })
+  console.log(`${newRestaurant.name} added to yelpDataForProfile`);
+} catch(error) {
+  console.log('we have an error: ', error.response.data)
+}
+}
 
 
   render() {
@@ -48,7 +75,14 @@ class App extends React.Component {
           <section>
             
           </section>
-          {this.props.auth0.isAuthenticated ? <Content /> : 
+          {this.props.auth0.isAuthenticated ? 
+          <Content 
+          yelpData={this.state.yelpData}
+          yelpDataForProfile={this.state.yelpDataForProfile}
+          getRestaurants={this.getRestaurants}
+          postRestaurants={this.postRestaurants}
+          
+          /> : 
             <Login loginHandler={this.loginHandler}></Login> }
           </Route>
           <Route exact path="/profile">
