@@ -1,15 +1,12 @@
 import React from 'react';
-import axios from 'axios';
-import Profile from './Profile';
-import LoginButton from './LoginButton';
-import LogoutButton from './LogoutButton';
+// import axios from 'axios';
+// import Profile from './Profile';
+// import LoginButton from './LoginButton';
+// import LogoutButton from './LogoutButton';
 import { withAuth0 } from "@auth0/auth0-react";
 
 class YelpResult extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+ 
   render() {
     return (
       <>
