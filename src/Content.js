@@ -1,10 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Card from 'react-bootstrap/Card';
 // import Profile from './Profile';
 // import LoginButton from './LoginButton';
 // import LogoutButton from './LogoutButton';
-import { withAuth0 } from "@auth0/auth0-react";
-import YelpResult from './YelpResult';
+// import { withAuth0 } from "@auth0/auth0-react";
+// import YelpResult from './YelpResult';
 
 class Content extends React.Component {
     constructor(props) {
@@ -14,54 +17,91 @@ class Content extends React.Component {
         }
     }
 
-    getRestaurants = async () => {
-        // // JSON Web Token = JWT (pronounced JOT)
-        // if (this.props.auth0.isAuthenticated) {
-            
-        //     // get token:
-        //     const res = await this.props.auth0.getIdTokenClaims();
-            
-        //     // MUST use double underscores
-        //     const jwt = res.__raw;
-        //     // a console.log of the token // this is as far as you need to go for the lab. Get the jwt to log to the console.
-
-        //     // as per axios docs, we can send an config object to make our call as well
-        //     const config = {
-        //         method: 'get',
-        //         baseURL: process.env.REACT_APP_SERVER,
-        //         url: '/restaurants',
-        //         headers: { "Authorization": `Bearer ${jwt}` }
-        //     };
-        //     const queryResults = await axios(config);
-        //     console.log(queryResults.data.businesses);
-        //     this.state.yelpData = queryResults.data.businesses;
-        // }
-
-        try{
-            let restaurants = await axios.get(`${process.env.REACT_APP_SERVER}/restaurants`);
+    getRestaurants = async (city, food) => {
+        try {
+            let restaurants = await axios.get(`${process.env.REACT_APP_SERVER}/restaurants?location=${city}&term=${food}`);
+            console.log(restaurants);
             this.setState({
                 yelpData: restaurants.data
             })
-            console.log(this.state.yelpData);
-        }catch(error){
+        } catch (error) {
             console.log(`error message `, error);
         }
     }
 
-    componentDidMount() {
-        this.getRestaurants();
+    performSearch = (e) => {
+        e.preventDefault();
+        const city = e.target.City.value;
+        const food = e.target.Food.value;
+
+        console.log(city);
+        console.log(food);
+        this.getRestaurants(city, food);
     }
 
-    render() {
-        return (
-            <>
-                <h1>City</h1>
-                {this.state.yelpData.map((yelpResult, idx) =>
-                    <YelpResult key={idx} item={yelpResult} />         
-                )};
-            </>
-        );
-    }
+//     postRestaurants = async (newRestaurant) => {
+      
+
+//             let dataToPost = await axios.post(`${process.env.REACT_APP_SERVER}/restaurants?location=${city}&term=${food}`, newRestaurant);
+//             console.log(dataToPost.data)
+//             this.setState({
+//             yelpData: [...this.state.yelpData, dataToPost.data]
+//         })
+        
+//     } catch(error) {
+//         console.log('we have an error: ', error.response.data)
+//     }
+// }
+
+// componentDidMount() {
+//     this.getRestaurants();
+// }
+
+render() {
+    return (
+        <>
+            <Form onSubmit={this.performSearch}>
+                <Form.Group controlId="City">
+                    <Form.Label>City</Form.Label>
+                    <Form.Control type="text" />
+                </Form.Group>
+                <Form.Group controlId="Food">
+                    <Form.Label>Food</Form.Label>
+                    <Form.Control type="text" />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Search
+                </Button>
+            </Form>
+
+            {
+                this.state.yelpData.map((restaurantData, idx) =>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src="restaurantData.img_url" />
+                        <Card.Body>
+                            <Card.Title>{restaurantData.name}</Card.Title>
+                            <Card.Subtitle>{restaurantData.rating}</Card.Subtitle>
+                            <Card.Text>
+                                {restaurantData.address1}
+                            </Card.Text>
+                            <Card.Text>
+                                {restaurantData.city}
+                            </Card.Text>
+
+                            <Card.Text>
+                                {restaurantData.state}
+                            </Card.Text>
+                            <Card.Text>
+                                {restaurantData.zip_code}
+                            </Card.Text>
+                            <Button variant="primary">Add</Button>
+                        </Card.Body>
+                    </Card>
+                )
+            }
+        </>
+    );
+}
 }
 
-export default withAuth0(Content);
+export default Content;
