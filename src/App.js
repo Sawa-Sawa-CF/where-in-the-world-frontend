@@ -26,37 +26,51 @@ class App extends React.Component {
     console.log(this.props.auth0.isAuthenticated);
     return (
 
-
       <>
-        {
-          this.props.auth0.isAuthenticated
+        <Header 
+        user={this.state.user} onLogout={this.logoutHandler}
+         />
+        
+
+      <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height:'90vh'}}> 
+          <section>
+            {
+            this.props.auth0.isAuthenticated
             ? <LogoutButton />
-            : <LoginButton />
-        }
-        {
-          this.props.auth0.isAuthenticated
+            : 
+            <>
+            <h1>Sign in with Auth0</h1>
+            <LoginButton />
+            </>
+            }
+          </section>
+          
+          {
+            this.props.auth0.isAuthenticated
             ?
             <Router>
-              <Header user={this.state.user} onLogout={this.logoutHandler} />
-              <Routes>
-                <Route exact path="/">
-                  {this.props.auth0.isAuthenticated ? <Content user={this.state.user} /> : <h2>Please Log In</h2>}
-                </Route>
-                <Route exact path="/Profile">
-                  <Profile userInfo={this.state.user} />
-                </Route>
-                <Route exact path="/LoginButton">
-                  {/* <LoginForm loginHandler={this.setLogin} /> */}
-                </Route>
-                <Route exact path="/LogoutButton">
-                  <LogoutButton onLogout={this.logoutHandler} />
-                </Route>
-              </Routes>
-              <Footer />
-            </Router>
-            : <h2>Please Log In to </h2>
-        }
-      </>
+                <Routes>
+                  <Route exact path="/">
+                    {this.props.auth0.isAuthenticated ? <Content user={this.state.user} /> : <h2>Please Log In</h2>}
+                  </Route>
+                  <Route exact path="/Profile">
+                    <Profile userInfo={this.state.user} />
+                  </Route>
+                  <Route exact path="/LoginButton">
+                    {/* <LoginForm loginHandler={this.setLogin} /> */}
+                  </Route>
+                  <Route exact path="/LogoutButton">
+                    <LogoutButton onLogout={this.logoutHandler} />
+                  </Route>
+                </Routes>
+              </Router>
+              : 
+              <>
+              </>
+            }
+      </div>
+      <Footer/>
+        </>
 
 
     )
