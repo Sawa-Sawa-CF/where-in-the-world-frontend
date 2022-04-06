@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
@@ -15,22 +15,24 @@ import './Content.css';
 class Content extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            yelpData: []
-        }
+        // this.state = {
+        //     // yelpData: [],
+        //     // yelpDataForProfile: []
+        // }
     }
 
-    getRestaurants = async (city, food) => {
-        try {
-            let restaurants = await axios.get(`${process.env.REACT_APP_SERVER}/restaurants?location=${city}&term=${food}`);
-            console.log(restaurants);
-            this.setState({
-                yelpData: restaurants.data
-            })
-        } catch (error) {
-            console.log(`error message `, error);
-        }
-    }
+    // getRestaurants = async (city, food) => {
+    //     try {
+    //         let restaurants = await axios.get(`${process.env.REACT_APP_SERVER}/restaurants?location=${city}&term=${food}`);
+    //         console.log(restaurants);
+    //         this.setState({
+    //             yelpData: restaurants.data
+    //         })
+    //     } catch (error) {
+    //         console.log(`error message `, error);
+    //     }
+    // }
+
 
     performSearch = (e) => {
         e.preventDefault();
@@ -39,18 +41,27 @@ class Content extends React.Component {
 
         console.log(city);
         console.log(food);
-        this.getRestaurants(city, food);
+        this.props.getRestaurants(city, food);
     }
 
+
+handleAddButton = (restaurant) => {
+    // this.state.yelpDataForProfile.push(restaurant);
+    console.log('updated state after add button pressed: ', this.props.yelpDataForProfile); 
+    console.log('restaurant passed in to button: ', restaurant); 
+    this.props.postRestaurants(restaurant);  
+    
+}
+
+
     //     postRestaurants = async (newRestaurant) => {
-
-
-    //             let dataToPost = await axios.post(`${process.env.REACT_APP_SERVER}/restaurants?location=${city}&term=${food}`, newRestaurant);
-    //             console.log(dataToPost.data)
+    //         try {
+    //             let dataToPost = await axios.post(`${process.env.REACT_APP_SERVER}/restaurants`, newRestaurant);
+    //             console.log(dataToPost.data, 'dataToPost'); 
     //             this.setState({
-    //             yelpData: [...this.state.yelpData, dataToPost.data]
+    //             yelpDataForProfile: [...this.state.yelpDataForProfile, dataToPost.data]
     //         })
-
+    //         console.log(`${newRestaurant.name} added to yelpDataForProfile`);
     //     } catch(error) {
     //         console.log('we have an error: ', error.response.data)
     //     }
@@ -61,6 +72,7 @@ class Content extends React.Component {
     // }
 
     render() {
+        console.log('updated state after add button pressed: ', this.props.yelpDataForProfile);
         return (
             <>  
                 <section className='form-section'>
@@ -105,10 +117,13 @@ class Content extends React.Component {
                         })}
                     </Accordion> */}
 
+                     {
+                         this.props.yelpData 
+                         ?
+                     
+                     this.props.yelpData.map((restaurantData, idx) =>
+                     <Card style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
 
-                    <section className='card-container'>
-                        {this.state.yelpData.map((restaurantData, idx) =>
-                     <Card className='restaurants' style={{ width: '18rem' }}>
                              <Card.Img variant="top"
                             src={restaurantData.image_url} />
                             <Card.Body>
@@ -117,15 +132,17 @@ class Content extends React.Component {
                                 <Card.Text>
                                    {restaurantData.address1}, {restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}
                                 </Card.Text>
-                                <Button variant="primary">Add</Button>
+
+                                <Button variant="primary" onClick={() => this.handleAddButton(restaurantData)}>Add</Button>
                             </Card.Body>
                         </Card>
-                     )}
-                    </section>
-                     
-                    
 
-                
+                        )
+                        
+                        :
+                        <></>
+                     }
+                    
             </>
         );
     }
