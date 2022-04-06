@@ -8,6 +8,7 @@ import './Header.css';
 import Header from './Header'
 import { withAuth0 } from '@auth0/auth0-react';
 
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,32 +37,35 @@ class App extends React.Component {
 
 
   render() {
-    const logoutUrl = this.props.auth0.buildLogoutUrl({returnTo: window.location.href});
+    const logoutUrl = this.props.auth0.buildLogoutUrl({ returnTo: window.location.href });
     console.log(this.props.auth0.isAuthenticated);
     return (
 
       <div>
-      <Router>
-        <Header user={this.state.user} renderLogoutUrl={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
-        <Switch>
-          <Route exact path="/">
-          <section>
-            
-          </section>
-          {this.props.auth0.isAuthenticated ? <Content /> : 
-            <Login loginHandler={this.loginHandler}></Login> }
-          </Route>
-          <Route exact path="/profile">
+        <Router>
+          <Header user={this.state.user} renderLogoutUrl={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
+          <Switch>
+            <Route exact path="/">
 
-          <Profile user={this.state.user}>
-
-          </Profile>
+              {this.props.auth0.isAuthenticated ? 
+              <Content className='content' /> :
+                <section className='login'>
+                  <Login loginHandler={this.loginHandler}></Login> 
+                </section>}
+          
+          
           </Route>
-        </Switch>
-        <Footer />
-        
-      </Router>
-    </div> 
+            <Route exact path="/profile">
+
+              <Profile user={this.state.user}>
+
+              </Profile>
+            </Route>
+          </Switch>
+          <Footer />
+
+        </Router>
+      </div>
     )
   }
 }

@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
 import Accordion from 'react-bootstrap/Accordion'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Content.css';
 // import Profile from './Profile';
 // import LoginButton from './LoginButton';
 // import LogoutButton from './LogoutButton';
@@ -61,8 +62,9 @@ class Content extends React.Component {
 
     render() {
         return (
-            <>
-                <Form onSubmit={this.performSearch}>
+            <>  
+                <section className='form-section'>
+                    <Form onSubmit={this.performSearch}>
                     <Form.Group controlId="City">
                         <Form.Label>City</Form.Label>
                         <Form.Control type="text" />
@@ -75,6 +77,8 @@ class Content extends React.Component {
                         Search
                     </Button>
                 </Form>
+                </section>
+                
 
             
                
@@ -102,31 +106,23 @@ class Content extends React.Component {
                     </Accordion> */}
 
 
-
-                     {this.state.yelpData.map((restaurantData, idx) =>
-                     <Card style={{ width: '18rem' }}>
+                    <section className='card-container'>
+                        {this.state.yelpData.map((restaurantData, idx) =>
+                     <Card className='restaurants' style={{ width: '18rem' }}>
                              <Card.Img variant="top"
                             src={restaurantData.image_url} />
                             <Card.Body>
-                                <Card.Title>{restaurantData.name}</Card.Title>
-                                <Card.Subtitle>{restaurantData.rating}</Card.Subtitle>
+                                <Card.Title>{restaurantData.name} </Card.Title>
+                                <Card.Subtitle>{restaurantData.rating}Stars</Card.Subtitle>
                                 <Card.Text>
-                                    {restaurantData.address1}
-                                </Card.Text>
-                                <Card.Text>
-                                    {restaurantData.city}
-                                </Card.Text>
-
-                                <Card.Text>
-                                    {restaurantData.state}
-                                </Card.Text>
-                                <Card.Text>
-                                    {restaurantData.zip_code}
+                                   {restaurantData.address1}, {restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}
                                 </Card.Text>
                                 <Button variant="primary">Add</Button>
                             </Card.Body>
                         </Card>
                      )}
+                    </section>
+                     
                     
 
                 
