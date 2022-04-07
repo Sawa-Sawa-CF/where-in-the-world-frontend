@@ -68,14 +68,17 @@ class App extends React.Component {
     console.log(this.props.auth0.isAuthenticated);
     return (
 
-      <div>
+      <>
+
+    <div id='background'></div>
+      <div id='app-body' >
+
         <Router>
           <Header user={this.state.user} renderLogoutUrl={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
           <Switch>
             <Route exact path="/">
-              <section>
 
-              </section>
+
               {this.props.auth0.isAuthenticated ?
                 <Content
                   yelpData={this.state.yelpData}
@@ -84,10 +87,13 @@ class App extends React.Component {
                   postRestaurants={this.postRestaurants}
 
                 /> :
-                <Login loginHandler={this.loginHandler}></Login>}
+
+                
+                <section className='login'>
+                  <Login loginHandler={this.loginHandler}></Login>
+                </section>
+              }
             </Route>
-
-
             <Route exact path="/profile">
 
               <Profile
@@ -97,10 +103,12 @@ class App extends React.Component {
             </Route>
 
           </Switch>
-          <Footer />
-
         </Router>
+
+        <Footer/>
       </div>
+      </>
+
     )
   }
 }

@@ -18,6 +18,7 @@ class Content extends React.Component {
          this.state = {
       
          }
+
     }
 
     // getRestaurants = async (city, food) => {
@@ -93,8 +94,7 @@ class Content extends React.Component {
 
 
 
-
-               
+                <section className='card-container'>
 
                 {
                     this.props.yelpData
@@ -121,7 +121,7 @@ class Content extends React.Component {
                         :
                         <></>
                 }
-
+                 </section>
             </>
         );
     }
