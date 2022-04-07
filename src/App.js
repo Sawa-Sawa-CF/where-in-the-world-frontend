@@ -27,6 +27,7 @@ class App extends React.Component {
       user: null,
       yelpData: null,
       yelpDataForProfile: [],
+      show: false,
     }
   }
 
@@ -97,7 +98,8 @@ class App extends React.Component {
             <Route exact path="/profile">
 
               <Profile
-                yelpDataForProfile={this.state.yelpDataForProfile} />
+                yelpDataForProfile={this.state.yelpDataForProfile}
+                show={this.state.show} />
 
 
             </Route>
