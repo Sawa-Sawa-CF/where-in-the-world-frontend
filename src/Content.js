@@ -3,9 +3,9 @@ import React from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Content.css';
+
 // import Profile from './Profile';
 // import LoginButton from './LoginButton';
 // import LogoutButton from './LogoutButton';
@@ -100,18 +100,18 @@ class Content extends React.Component {
                         ?
 
                         this.props.yelpData.map((restaurantData, idx) =>
-                            <Card className='restaurants'style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
+                        <Card className='restaurants'style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
 
-                                <Card.Img variant="top"
+                                <Card.Img className='img' variant="top"
                                     src={restaurantData.image_url} />
                                 <Card.Body>
+                            <Button className='button' variant="primary" onClick={() => this.handleAddButton(restaurantData)}>Add</Button>
                                     <Card.Title>{restaurantData.name} </Card.Title>
-                                    <Card.Subtitle>{restaurantData.rating}Stars</Card.Subtitle>
+                                    <Card.Subtitle>{restaurantData.rating} Stars⭐</Card.Subtitle>
                                     <Card.Text>
                                         {restaurantData.address1}, {restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}
                                     </Card.Text>
 
-                                    <Button variant="primary" onClick={() => this.handleAddButton(restaurantData)}>Add</Button>
                                 </Card.Body>
                             </Card>
 
