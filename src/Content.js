@@ -94,14 +94,13 @@ class Content extends React.Component {
 
 
 
-                <section className='card-container'>
-
+            <section className='card-container'>
                 {
                     this.props.yelpData
                         ?
 
                         this.props.yelpData.map((restaurantData, idx) =>
-                            <Card style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
+                            <Card className='restaurants'style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
 
                                 <Card.Img variant="top"
                                     src={restaurantData.image_url} />
@@ -121,7 +120,7 @@ class Content extends React.Component {
                         :
                         <></>
                 }
-                 </section>
+            </section>
             </>
         );
     }

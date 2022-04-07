@@ -72,7 +72,6 @@ class App extends React.Component {
 
     <div id='background'></div>
       <div id='app-body' >
-
         <Router>
           <Header user={this.state.user} renderLogoutUrl={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
           <Switch>
