@@ -25,7 +25,7 @@ class App extends React.Component {
     this.state = {
       user: null,
       yelpData: null,
-      yelpDataForProfile: []
+      yelpDataForProfile: [],
     }
   }
 
@@ -38,29 +38,29 @@ class App extends React.Component {
 
   getRestaurants = async (city, food) => {
     try {
-        let restaurants = await axios.get(`${process.env.REACT_APP_SERVER}/restaurants?location=${city}&term=${food}`);
-        console.log(restaurants);
-        this.setState({
-            yelpData: restaurants.data
-        })
-    } catch (error) {
-        console.log(`error message `, error);
-    }
-}
-
-
-postRestaurants = async (newRestaurant) => {
-  try {
-      let dataToPost = await axios.post(`${process.env.REACT_APP_SERVER}/restaurants`, newRestaurant);
-      console.log(dataToPost.data, 'dataToPost'); 
+      let restaurants = await axios.get(`${process.env.REACT_APP_SERVER}/restaurants?location=${city}&term=${food}`);
+      console.log(restaurants);
       this.setState({
-      yelpDataForProfile: [...this.state.yelpDataForProfile, dataToPost.data]
-  })
-  console.log(`${newRestaurant.name} added to yelpDataForProfile`);
-} catch(error) {
-  console.log('we have an error: ', error.response.data)
-}
-}
+        yelpData: restaurants.data
+      })
+    } catch (error) {
+      console.log(`error message `, error);
+    }
+  }
+
+
+  postRestaurants = async (newRestaurant) => {
+    try {
+      let dataToPost = await axios.post(`${process.env.REACT_APP_SERVER}/restaurants`, newRestaurant);
+      console.log(dataToPost.data, 'dataToPost');
+      this.setState({
+        yelpDataForProfile: [...this.state.yelpDataForProfile, dataToPost.data]
+      })
+      console.log(`${newRestaurant.name} added to yelpDataForProfile`);
+    } catch (error) {
+      console.log('we have an error: ', error.response.data)
+    }
+  }
 
 
   render() {
@@ -69,29 +69,33 @@ postRestaurants = async (newRestaurant) => {
     return (
 
       <div>
-      <Router>
-        <Header user={this.state.user} renderLogoutUrl={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
-        <Switch>
-          <Route exact path="/">
-          <section>
-            
-          </section>
-          {this.props.auth0.isAuthenticated ? 
-          <Content 
-          yelpData={this.state.yelpData}
-          yelpDataForProfile={this.state.yelpDataForProfile}
-          getRestaurants={this.getRestaurants}
-          postRestaurants={this.postRestaurants}
-          
-          /> : 
-            <Login loginHandler={this.loginHandler}></Login> }
-          </Route>
+        <Router>
+          <Header user={this.state.user} renderLogoutUrl={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
+          <Switch>
+            <Route exact path="/">
+              <section>
+
+              </section>
+              {this.props.auth0.isAuthenticated ?
+                <Content
+                  yelpData={this.state.yelpData}
+                  yelpDataForProfile={this.state.yelpDataForProfile}
+                  getRestaurants={this.getRestaurants}
+                  postRestaurants={this.postRestaurants}
+
+                /> :
+                <Login loginHandler={this.loginHandler}></Login>}
+            </Route>
+
+
             <Route exact path="/profile">
 
-              <Profile user={this.state.user}>
+              <Profile
+                yelpDataForProfile={this.state.yelpDataForProfile} />
 
-              </Profile>
+
             </Route>
+
           </Switch>
           <Footer />
 
