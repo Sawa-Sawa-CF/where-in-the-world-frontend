@@ -1,16 +1,29 @@
 .form-section{
-  display: flex;  
+  display: flex; 
   justify-content: center;
   align-items: center;
+
   
 }
 
+.img{
+  width: 100%;
+  overflow: hidden;
+}
 
 .card-container{
   display:flex;
-  
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
+
+
+footer{
+  display:flex;
+  justify-content:space-between;
+  background-color: rgb(22, 82, 135);
+}
 
 .restaurants{
   background-color: aqua;
@@ -22,3 +35,5 @@
   background: linear-gradient(#e66465, #9198e5);
   
 }
+
+

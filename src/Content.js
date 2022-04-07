@@ -15,10 +15,10 @@ import './Content.css';
 class Content extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     // yelpData: [],
-        //     // yelpDataForProfile: []
-        // }
+        this.state = {
+            yelpData: [],
+            yelpDataForProfile: []
+        }
     }
 
     // getRestaurants = async (city, food) => {
@@ -45,13 +45,13 @@ class Content extends React.Component {
     }
 
 
-handleAddButton = (restaurant) => {
-    // this.state.yelpDataForProfile.push(restaurant);
-    console.log('updated state after add button pressed: ', this.props.yelpDataForProfile); 
-    console.log('restaurant passed in to button: ', restaurant); 
-    this.props.postRestaurants(restaurant);  
-    
-}
+    handleAddButton = (restaurant) => {
+        // this.state.yelpDataForProfile.push(restaurant);
+        console.log('updated state after add button pressed: ', this.props.yelpDataForProfile);
+        console.log('restaurant passed in to button: ', restaurant);
+        this.props.postRestaurants(restaurant);
+
+    }
 
 
     //     postRestaurants = async (newRestaurant) => {
@@ -74,28 +74,28 @@ handleAddButton = (restaurant) => {
     render() {
         console.log('updated state after add button pressed: ', this.props.yelpDataForProfile);
         return (
-            <>  
+            <>
                 <section className='form-section'>
                     <Form onSubmit={this.performSearch}>
-                    <Form.Group controlId="City">
-                        <Form.Label>City</Form.Label>
-                        <Form.Control type="text" />
-                    </Form.Group>
-                    <Form.Group controlId="Food">
-                        <Form.Label>Food</Form.Label>
-                        <Form.Control type="text" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Search
-                    </Button>
-                </Form>
+                        <Form.Group controlId="City">
+                            <Form.Label>City</Form.Label>
+                            <Form.Control type="text" />
+                        </Form.Group>
+                        <Form.Group controlId="Food">
+                            <Form.Label>Food</Form.Label>
+                            <Form.Control type="text" />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Search
+                        </Button>
+                    </Form>
                 </section>
-                
 
-            
-               
 
-                    {/* <Accordion defaultActiveKey='0'>
+
+
+
+                {/* <Accordion defaultActiveKey='0'>
                        
                        {this.state.yelpData.map((restaurantData, idx) => {
                             return(
@@ -117,32 +117,40 @@ handleAddButton = (restaurant) => {
                         })}
                     </Accordion> */}
 
-                     {
-                         this.props.yelpData 
-                         ?
-                     
-                     this.props.yelpData.map((restaurantData, idx) =>
-                     <Card style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
+                <section className='card-container'>
 
-                             <Card.Img variant="top"
-                            src={restaurantData.image_url} />
-                            <Card.Body>
-                                <Card.Title>{restaurantData.name} </Card.Title>
-                                <Card.Subtitle>{restaurantData.rating}Stars</Card.Subtitle>
-                                <Card.Text>
-                                   {restaurantData.address1}, {restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}
-                                </Card.Text>
+                    {
+                        this.props.yelpData
+                            ?
 
-                                <Button variant="primary" onClick={() => this.handleAddButton(restaurantData)}>Add</Button>
-                            </Card.Body>
-                        </Card>
+                            this.props.yelpData.map((restaurantData, idx) =>
+                                <Card className='restaurants' style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
+                                    <Card.Img className='img'
+                                        src={restaurantData.image_url} />
+                                    <section style={{width:'fit fit-content'}}>
+                                        <Card.Body>
+                                        <Card.Title>{restaurantData.name} </Card.Title>
+                                        <Card.Subtitle>{restaurantData.rating}Stars</Card.Subtitle>
+                                        <Card.Text>
+                                            {restaurantData.address1}, {restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}
+                                        </Card.Text>
+                                    
+                                    
+                                        <section className='Button'>
+                                            <Button class="btn btn-primary" type="button" onClick={() => this.handleAddButton(restaurantData)}>Add</Button>
+                                        </section>
 
-                        )
-                        
-                        :
-                        <></>
-                     }
-                    
+                                    </Card.Body>
+                                    </section>
+                                </Card>
+
+                            )
+
+                            :
+                            <></>
+                    }
+                </section>
+
             </>
         );
     }
