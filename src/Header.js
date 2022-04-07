@@ -1,29 +1,29 @@
 import React from 'react';
-// import LogoutButton from './LogoutButton';
-import { Navbar, NavItem } from 'react-bootstrap';
+import LogoutButton from './LogoutButton';
+import { NavItem } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import './Header.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 class Header extends React.Component {
   render() {
     return (
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand>Food you Like</Navbar.Brand>
-        <NavItem>
+      <div className='header'>
+        <div className='header-title'>Food you Like</div>
+        <div className='header-nav'>
           <Link to="/" className="nav-link">Home</Link>
-        </NavItem>
-        {this.props.isAuthenticated && <React.Fragment><NavItem>
           <Link to="/profile" className="nav-link">Profile</Link>
-        </NavItem>
-          <NavItem>
-            <a href={this.props.logoutUrl} className="nav-link">Logout</a>
-          </NavItem></React.Fragment>
-        }
-        
-
-      </Navbar>
+        </div>
+        <div className='header-logout'>
+          {this.props.renderLogoutUrl ?
+            <NavItem>
+              <a href={this.props.logoutUrl} className="nav-link">Logout</a>
+            </NavItem>
+            : " "
+          }
+          {this.props.user ? <NavItem><LogoutButton /></NavItem> : " "}
+        </div>
+      </div >
     )
   }
 }
