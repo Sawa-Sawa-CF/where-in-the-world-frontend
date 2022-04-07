@@ -3,7 +3,7 @@ import React from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
-import Accordion from 'react-bootstrap/Accordion'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Content.css';
 // import Profile from './Profile';
@@ -15,10 +15,10 @@ import './Content.css';
 class Content extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            yelpData: [],
-            yelpDataForProfile: []
-        }
+         this.state = {
+      
+         }
+
     }
 
     // getRestaurants = async (city, food) => {
@@ -94,63 +94,34 @@ class Content extends React.Component {
 
 
 
-
-                {/* <Accordion defaultActiveKey='0'>
-                       
-                       {this.state.yelpData.map((restaurantData, idx) => {
-                            return(
-                                  <Accordion.Item eventKey={idx}>
-                                <Accordion.Header>{restaurantData.name}</Accordion.Header>
-                                <Accordion.Body>
-                                    <div>
-                                        <img src={restaurantData.image_url}> </img>
-                                    </div>
-                                    <p>{restaurantData.rating}</p>
-                                    <p>{restaurantData.address1}</p>
-                                    <p>{restaurantData.city}</p>
-                                    <p>{restaurantData.state}</p>
-                                    <p>{restaurantData.zip_code}</p>
-                                    <p>{restaurantData.notes}</p>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                            )
-                        })}
-                    </Accordion> */}
-
                 <section className='card-container'>
 
-                    {
-                        this.props.yelpData
-                            ?
+                {
+                    this.props.yelpData
+                        ?
 
-                            this.props.yelpData.map((restaurantData, idx) =>
-                                <Card className='restaurants' style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
-                                    <Card.Img className='img'
-                                        src={restaurantData.image_url} />
-                                    <section style={{width:'fit fit-content'}}>
-                                        <Card.Body>
-                                        <Card.Title>{restaurantData.name} </Card.Title>
-                                        <Card.Subtitle>{restaurantData.rating}Stars</Card.Subtitle>
-                                        <Card.Text>
-                                            {restaurantData.address1}, {restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}
-                                        </Card.Text>
-                                    
-                                    
-                                        <section className='Button'>
-                                            <Button class="btn btn-primary" type="button" onClick={() => this.handleAddButton(restaurantData)}>Add</Button>
-                                        </section>
+                        this.props.yelpData.map((restaurantData, idx) =>
+                            <Card style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
 
-                                    </Card.Body>
-                                    </section>
-                                </Card>
+                                <Card.Img variant="top"
+                                    src={restaurantData.image_url} />
+                                <Card.Body>
+                                    <Card.Title>{restaurantData.name} </Card.Title>
+                                    <Card.Subtitle>{restaurantData.rating}Stars</Card.Subtitle>
+                                    <Card.Text>
+                                        {restaurantData.address1}, {restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}
+                                    </Card.Text>
 
-                            )
+                                    <Button variant="primary" onClick={() => this.handleAddButton(restaurantData)}>Add</Button>
+                                </Card.Body>
+                            </Card>
 
-                            :
-                            <></>
-                    }
-                </section>
+                        )
 
+                        :
+                        <></>
+                }
+                 </section>
             </>
         );
     }
