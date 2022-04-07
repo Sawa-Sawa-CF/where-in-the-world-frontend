@@ -1,55 +1,84 @@
 import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Profile = ({ yelpDataForProfile }) => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      places: [],
 
+    }
 
-
-
-
-  if (isLoading) {
-    return <div>Loading ...</div>;
   }
-  // console.log(this.props.yelpDataForProfile, 'yelp data for profile');
-  return (
-    <>
-      {isAuthenticated && (
-        <div>
-          <img src={user.picture} alt={user.name} />
-          <h2>{user.name}</h2>
-          <p>{user.email}</p>
+  getSavedPlaces = async () => {
+    try {
+      let savedPlaces = await axios.get(`${process.env.REACT_APP_SERVER}/savedRestaurants`);
+      
+      this.setState({
+        places: savedPlaces.data
+      })
+    } catch (error) {
+      console.log(`error message `, error);
+    }
+  }
 
 
-          {yelpDataForProfile && yelpDataForProfile.map((restaurant, idx) => {
-            return (
-              <Card style={{ width: '18rem' }} key={idx}>
+  componentDidMount() {
+     this.getSavedPlaces();
+  }
 
-                <Card.Img variant="top"
-                  src={restaurant.image_url} />
-                <Card.Body>
-                  <Card.Title>{restaurant.name} </Card.Title>
-                  <Card.Subtitle>{restaurant.rating}Stars</Card.Subtitle>
-                  <Card.Text>
-                    {restaurant.address1}, {restaurant.city}, {restaurant.state} {restaurant.zip_code}
-                  </Card.Text>
+  deleteSavedPlace = async (place) => {
+      await axios.delete(`${process.env.REACT_APP_SERVER}/restaurants/${place._id}`);
+      this.getSavedPlaces();
+  }
 
-                  <Button variant="primary" >Delete</Button>
-                  <Button variant="primary" >Edit</Button>
-                </Card.Body>
-              </Card>
-
-            )
-          })}
+  updateSavedPlace = async (place) => {
+    await axios.put(`${process.env.REACT_APP_SERVER}/restaurants/${place._id}`, place);
+    this.getSavedPlaces();
+}
 
 
-        </div>
 
-      )}
-    </>
-  );
+
+
+  render() {
+    return (
+      <>
+
+
+
+
+        {this.state.places && this.state.places.map((restaurant, idx) => {
+          return (
+            <Card style={{ width: '18rem' }} key={idx}>
+
+              <Card.Img variant="top"
+                src={restaurant.image_url} />
+              <Card.Body>
+                <Card.Title>{restaurant.name} </Card.Title>
+                <Card.Subtitle>{restaurant.rating}Stars</Card.Subtitle>
+                <Card.Text>
+                  {restaurant.address1}, {restaurant.city}, {restaurant.state} {restaurant.zip_code}
+                </Card.Text>
+
+                <Button variant="primary" onClick={() => this.deleteSavedPlace(restaurant)} >Delete</Button>
+                <Button variant="primary" >Edit</Button>
+              </Card.Body>
+            </Card>
+
+          )
+        })}
+
+
+
+
+
+      </>
+    );
+  }
 }
 
 

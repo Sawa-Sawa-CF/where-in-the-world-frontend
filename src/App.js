@@ -73,7 +73,7 @@ class App extends React.Component {
     <div id='background'></div>
       <div id='app-body' >
         <Router>
-          <Header user={this.state.user} renderLogoutUrl={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
+          <Header user={this.state.user} isAuthenticated={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
           <Switch>
             <Route exact path="/">
 
