@@ -24,6 +24,7 @@
   display: inline-block;
   background-color: black;
   vertical-align: bottom;
+ 
 }
 
 footer{
@@ -40,6 +41,7 @@ footer{
   margin: .9vw;
   padding: 1vw;
   background: linear-gradient(#bdc3c7, #2c3e50);
+  
 }
 
 
