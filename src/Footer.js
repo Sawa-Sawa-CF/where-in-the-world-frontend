@@ -1,49 +1,39 @@
 import React, { Component } from 'react'
+import './Footer.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+
+
+
 
 export default class Footer extends Component {
   render() {
+
+
+
+
     return (
-      <footer>
+      <>
+        <footer class="footer-distributed">
 
-        <div>
-          <ul>
-            <li>info</li>
-            <li>info</li>
-            <li>info</li>
-          </ul>
-        </div>
+          <div class="footer-right">
 
-        <div>
-          <ul>
-            <li>info</li>
-            <li>info</li>
-            <li>info</li>
-          </ul>
-        </div>
+            <a href="#"><FontAwesomeIcon icon="fa-brands fa-github" /></a>
+            <a href="#"><FontAwesomeIcon icon="fa-brands fa-twitter" /></a>
+            <a href="#"><FontAwesomeIcon icon="fa-brands fa-linkedin" /></a>
+          </div>
 
-        <div>
-          <ul>
-            <li>info</li>
-            <li>info</li>
-            <li>info</li>
-          </ul>
-        </div>
+          <div class="footer-left">
 
-        <div>
-          <form>
+            <p class="footer-links">
+              <a class="link-1" href="#">Home</a>
+              <a href="#">About</a>
+            </p>
+            <p>Code Fellows &copy; 2022</p>
+          </div>
 
-          </form>
-          <nav>
-            <a href=''>
-              <img></img>
-            </a>
-            <a href=''>
-              <img></img>
-            </a>
-          </nav>
-        </div>
-
-      </footer>
+        </footer>
+      </>
 
     )
   }

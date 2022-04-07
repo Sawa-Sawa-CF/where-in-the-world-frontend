@@ -1,7 +1,8 @@
 import React from "react";
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Profile extends React.Component {
@@ -50,12 +51,13 @@ class Profile extends React.Component {
 
 
 
+        <div className='card-container' >
 
         {this.state.places && this.state.places.map((restaurant, idx) => {
           return (
-            <Card style={{ width: '18rem' }} key={idx}>
+            <Card className="restaurants" style={{ width: '18rem' }} key={idx}>
 
-              <Card.Img variant="top"
+              <Card.Img className='img' variant="top"
                 src={restaurant.image_url} />
               <Card.Body>
                 <Card.Title>{restaurant.name} </Card.Title>
@@ -63,14 +65,14 @@ class Profile extends React.Component {
                 <Card.Text>
                   {restaurant.address1}, {restaurant.city}, {restaurant.state} {restaurant.zip_code}
                 </Card.Text>
-
-                <Button variant="primary" onClick={() => this.deleteSavedPlace(restaurant)} >Delete</Button>
-                <Button variant="primary" >Edit</Button>
+                <Button className='button' variant="primary" onClick={() => this.deleteSavedPlace(restaurant)} >Delete</Button>
+                <Button className='button' variant="primary" >Edit</Button>
               </Card.Body>
             </Card>
 
           )
         })}
+        </div>
 
 
 

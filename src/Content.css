@@ -2,8 +2,6 @@
   display: flex; 
   justify-content: center;
   align-items: center;
-
-  
 }
 
 .img{
@@ -17,7 +15,17 @@
   justify-content: center;
 }
 
+.img{
+  width:120px;
+  height:120px;
+}
 
+.button{
+  display: inline-block;
+  background-color: black;
+  vertical-align: bottom;
+ 
+}
 
 footer{
   display:flex;
@@ -26,13 +34,13 @@ footer{
 }
 
 .restaurants{
+  display: inline-block;
   background-color: aqua;
   width: 20vw;
   border: beige solid 9px;
-  border-radius: 20px 20px;
   margin: .9vw;
   padding: 1vw;
-  background: linear-gradient(#e66465, #9198e5);
+  background: linear-gradient(#bdc3c7, #2c3e50);
   
 }
 
