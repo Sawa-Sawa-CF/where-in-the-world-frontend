@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Auth0Provider } from "@auth0/auth0-react";
 
-
-
 ReactDOM.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH_DOMAIN}
@@ -15,13 +13,4 @@ ReactDOM.render(
   </Auth0Provider>,
   document.getElementById('root')
 );
-
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
-
 
