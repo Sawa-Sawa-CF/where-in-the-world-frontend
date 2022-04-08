@@ -36,7 +36,7 @@ class Content extends React.Component {
                             <Form.Control type="text" />
                         </Form.Group>
                         <Form.Group controlId="Food">
-                            <Form.Label>Food</Form.Label>
+                            <Form.Label>Food or Activity</Form.Label>
                             <Form.Control type="text" />
                         </Form.Group>
                         <Button variant="primary" type="submit">

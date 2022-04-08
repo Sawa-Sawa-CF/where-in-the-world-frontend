@@ -6,8 +6,9 @@ import Footer from './Footer';
 import axios from 'axios';
 import './App.css';
 import './Header.css';
-import Header from './Header'
+import Header from './Header';
 import { withAuth0 } from '@auth0/auth0-react';
+import AboutUs from './AboutUs';
 
 import {
   BrowserRouter as Router,
@@ -68,7 +69,11 @@ class App extends React.Component {
         <Router>
           <Header user={this.state.user} isAuthenticated={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
           <Switch>
+          <Route exact path="/AboutUs">
+              <AboutUs />
+            </Route>
             <Route exact path="/">
+            
               {this.props.auth0.isAuthenticated ?
                 <Content
                   yelpData={this.state.yelpData}
