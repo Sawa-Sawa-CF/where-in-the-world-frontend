@@ -1,0 +1,49 @@
+.form-section{
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.img{
+  width: 100%;
+  overflow: hidden;
+}
+
+.card-container{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.img{
+  width:120px;
+  height:120px;
+}
+
+.button{
+  display: inline-block;
+  background-color: black;
+  vertical-align: bottom;
+ 
+}
+
+footer{
+  display:flex;
+  justify-content:space-between;
+  background-color: rgb(22, 82, 135);
+}
+
+.restaurants{
+  display: inline-block;
+  background-color: aqua;
+  width: 20vw;
+  border: beige solid 9px;
+  margin: .9vw;
+  padding: 1vw;
+  background: linear-gradient(#bdc3c7, #2c3e50);
+  
+}
+
+
+
