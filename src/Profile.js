@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form } from "react-bootstrap";
+import './Profile.css';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -79,6 +80,11 @@ class Profile extends React.Component {
   render() {
     return (
       <>
+
+
+      <div id='saved-locations'>
+      <h1> Saved Locations</h1>
+      </div>
         {
           this.state.show ?
             (
@@ -95,14 +101,16 @@ class Profile extends React.Component {
                     </Form.Label>
                     <Form.Control id='FormText' type="text" >
                     </Form.Control>
-                    <Button className='button' variant="primary" type="submit"  >Edit</Button>
+                    <Button className='button' variant="primary" type="submit">Save</Button>
                   </Form.Group>
                   </Form>
                 </Modal.Body>
               </Modal>
             ) :
             (
+
               <div className='card-container' >
+            
                 {this.state.places && this.state.places.map((restaurant, idx) => {
                   return (
                     <Card className="restaurants" style={{ width: '18rem' }} key={idx}>
