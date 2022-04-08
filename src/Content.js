@@ -1,76 +1,30 @@
 import React from 'react';
-// import axios from 'axios';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Content.css';
-
-// import Profile from './Profile';
-// import LoginButton from './LoginButton';
-// import LogoutButton from './LogoutButton';
-// import { withAuth0 } from "@auth0/auth0-react";
-// import YelpResult from './YelpResult';
-
 class Content extends React.Component {
     constructor(props) {
         super(props);
          this.state = {
       
          }
-
     }
-
-    // getRestaurants = async (city, food) => {
-    //     try {
-    //         let restaurants = await axios.get(`${process.env.REACT_APP_SERVER}/restaurants?location=${city}&term=${food}`);
-    //         console.log(restaurants);
-    //         this.setState({
-    //             yelpData: restaurants.data
-    //         })
-    //     } catch (error) {
-    //         console.log(`error message `, error);
-    //     }
-    // }
-
-
     performSearch = (e) => {
         e.preventDefault();
         const city = e.target.City.value;
         const food = e.target.Food.value;
-
         console.log(city);
         console.log(food);
         this.props.getRestaurants(city, food);
     }
-
-
     handleAddButton = (restaurant) => {
         // this.state.yelpDataForProfile.push(restaurant);
         console.log('updated state after add button pressed: ', this.props.yelpDataForProfile);
         console.log('restaurant passed in to button: ', restaurant);
         this.props.postRestaurants(restaurant);
-
     }
-
-
-    //     postRestaurants = async (newRestaurant) => {
-    //         try {
-    //             let dataToPost = await axios.post(`${process.env.REACT_APP_SERVER}/restaurants`, newRestaurant);
-    //             console.log(dataToPost.data, 'dataToPost'); 
-    //             this.setState({
-    //             yelpDataForProfile: [...this.state.yelpDataForProfile, dataToPost.data]
-    //         })
-    //         console.log(`${newRestaurant.name} added to yelpDataForProfile`);
-    //     } catch(error) {
-    //         console.log('we have an error: ', error.response.data)
-    //     }
-    // }
-
-    // componentDidMount() {
-    //     this.getRestaurants();
-    // }
-
     render() {
         console.log('updated state after add button pressed: ', this.props.yelpDataForProfile);
         return (
@@ -90,18 +44,12 @@ class Content extends React.Component {
                         </Button>
                     </Form>
                 </section>
-
-
-
-
             <section className='card-container'>
                 {
                     this.props.yelpData
                         ?
-
                         this.props.yelpData.map((restaurantData, idx) =>
                         <Card className='restaurants'style={{ width: '18rem' }} key={this.props.yelpData.indexOf(restaurantData)}>
-
                                 <Card.Img className='img' variant="top"
                                     src={restaurantData.image_url} />
                                 <Card.Body>
@@ -111,12 +59,9 @@ class Content extends React.Component {
                                     <Card.Text>
                                         {restaurantData.address1}, {restaurantData.city}, {restaurantData.state} {restaurantData.zip_code}
                                     </Card.Text>
-
                                 </Card.Body>
                             </Card>
-
                         )
-
                         :
                         <></>
                 }
