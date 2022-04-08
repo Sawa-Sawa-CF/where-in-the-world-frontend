@@ -1,10 +1,8 @@
 import React from 'react';
-// import LogoutButton from './LogoutButton';
 import { Navbar, NavItem } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import './Header.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 class Header extends React.Component {
   render() {
@@ -21,8 +19,6 @@ class Header extends React.Component {
             <a href={this.props.logoutUrl} className="nav-link">Logout</a>
           </NavItem></React.Fragment>
         }
-        
-
       </Navbar>
     )
   }
