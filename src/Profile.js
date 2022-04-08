@@ -72,7 +72,7 @@ class Profile extends React.Component {
    this.setState({
      show: false,
    })
-   let response = await axios.put(`${process.env.REACT_APP_SERVER}/restaurants/${this.state.placeToUpdate._id}`, this.state.placeToUpdate);
+   await axios.put(`${process.env.REACT_APP_SERVER}/restaurants/${this.state.placeToUpdate._id}`, this.state.placeToUpdate);
    this.getSavedPlaces();
   }
 
