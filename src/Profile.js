@@ -184,7 +184,7 @@ class Profile extends React.Component {
                         src={restaurant.image_url} />
                       <Card.Body>
                         <Card.Title>{restaurant.name} </Card.Title>
-                        <Card.Subtitle>{restaurant.rating}Stars</Card.Subtitle>
+                        <Card.Subtitle>{restaurant.rating} Stars⭐</Card.Subtitle>
                         <Card.Text>
                           {restaurant.address1}, {restaurant.city}, {restaurant.state} {restaurant.zip_code} 
                           <br></br>
