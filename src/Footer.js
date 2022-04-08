@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import './Footer.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 export default class Footer extends Component {
   render() {
@@ -9,9 +7,6 @@ export default class Footer extends Component {
       <>
         <footer class="footer-distributed">
           <div class="footer-right">
-            <a href="#"><FontAwesomeIcon icon="fa-brands fa-github" /></a>
-            <a href="#"><FontAwesomeIcon icon="fa-brands fa-twitter" /></a>
-            <a href="#"><FontAwesomeIcon icon="fa-brands fa-linkedin" /></a>
           </div>
           <div class="footer-left">
             <p class="footer-links">
