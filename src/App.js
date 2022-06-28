@@ -6,10 +6,9 @@ import Footer from './Footer';
 import axios from 'axios';
 import './App.css';
 import './Header.css';
-import Header from './Header'
+import Header from './Header';
 import { withAuth0 } from '@auth0/auth0-react';
-
-
+import AboutUs from './AboutUs';
 
 import {
   BrowserRouter as Router,
@@ -17,12 +16,9 @@ import {
   Route
 } from "react-router-dom";
 
-
-
 class App extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
       user: null,
       yelpData: null,
@@ -50,7 +46,6 @@ class App extends React.Component {
     }
   }
 
-
   postRestaurants = async (newRestaurant) => {
     try {
       let dataToPost = await axios.post(`${process.env.REACT_APP_SERVER}/restaurants`, newRestaurant);
@@ -64,53 +59,43 @@ class App extends React.Component {
     }
   }
 
-
   render() {
     const logoutUrl = this.props.auth0.buildLogoutUrl({ returnTo: window.location.href });
     console.log(this.props.auth0.isAuthenticated);
     return (
-
       <>
-
     <div id='background'></div>
       <div id='app-body' >
         <Router>
           <Header user={this.state.user} isAuthenticated={this.props.auth0.isAuthenticated} logoutUrl={logoutUrl} />
           <Switch>
+          <Route exact path="/AboutUs">
+              <AboutUs />
+            </Route>
             <Route exact path="/">
-
-
+            
               {this.props.auth0.isAuthenticated ?
                 <Content
                   yelpData={this.state.yelpData}
                   yelpDataForProfile={this.state.yelpDataForProfile}
                   getRestaurants={this.getRestaurants}
                   postRestaurants={this.postRestaurants}
-
                 /> :
-
-                
                 <section className='login'>
                   <Login loginHandler={this.loginHandler}></Login>
                 </section>
               }
             </Route>
             <Route exact path="/profile">
-
               <Profile
                 yelpDataForProfile={this.state.yelpDataForProfile}
                 show={this.state.show} />
-
-
             </Route>
-
           </Switch>
         </Router>
-
         <Footer/>
       </div>
       </>
-
     )
   }
 }

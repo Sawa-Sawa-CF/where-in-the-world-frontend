@@ -2,6 +2,7 @@
   display: flex; 
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 .img{
@@ -43,5 +44,6 @@ footer{
   background: linear-gradient(#bdc3c7, #2c3e50);
   
 }
+
 
 

@@ -1,40 +1,26 @@
-import React, { Component } from 'react'
-import './Footer.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-
+import React, { Component } from 'react';
+import './Footer.css';
+// import ReactDOM from 'react-dom';
+// import { SocialIcon } from 'react-social-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCompass } from '@fortawesome/free-regular-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+library.add(fab, faCompass);
 
 
 
 export default class Footer extends Component {
   render() {
-
-
-
-
     return (
       <>
-        <footer class="footer-distributed">
-
-          <div class="footer-right">
-
-            <a href="#"><FontAwesomeIcon icon="fa-brands fa-github" /></a>
-            <a href="#"><FontAwesomeIcon icon="fa-brands fa-twitter" /></a>
-            <a href="#"><FontAwesomeIcon icon="fa-brands fa-linkedin" /></a>
+        <footer className="footer-distributed">
+          <a href='https://github.com/Sawa-Sawa-CF'><FontAwesomeIcon icon={['fab', 'github']} /></a>
+          <div>
+            <FontAwesomeIcon icon='far fa-compass' />
           </div>
-
-          <div class="footer-left">
-
-            <p class="footer-links">
-              <a class="link-1" href="#">Home</a>
-              <a href="#">About</a>
-            </p>
-            <p>Code Fellows &copy; 2022</p>
-          </div>
-
         </footer>
       </>
-
     )
   }
 }
